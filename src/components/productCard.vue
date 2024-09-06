@@ -34,7 +34,7 @@
         v-model="price"
         label="Стоимость"
         prepend-icon="mdi-currency-rub"
-        class="ml-2 w-75"
+        class="ml-4 w-75"
         type="number"
         hide-details="auto"
         variant="solo-filled"
