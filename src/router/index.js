@@ -1,15 +1,24 @@
-import InfoPage from '@/pages/infoPage.vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createMemoryHistory, createRouter } from 'vue-router'
+import infoPage from '@/pages/infoPage.vue'
+import countPage from '@/pages/countPage.vue'
+import countedPage from '@/pages/countedPage.vue'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+const routes = [
     {
-      path: '/',
-      name: 'info',
-      component: InfoPage
+        path: '/',
+        component: infoPage,
     },
-  ]
-})
+    {
+        path: '/calculation',
+        component: countPage,
+    },
+    {
+        path: '/result',
+        component: countedPage,
+    },
+]
 
-export default router
+export const router = createRouter({
+    history: createMemoryHistory(),
+    routes,
+})

@@ -13,9 +13,9 @@
         class="d-flex justify-center align-center ma-auto"
       >
       </v-switch>
-      <v-btn icon="mdi-information-box-outline"></v-btn>
-      <v-btn icon="mdi-cart-check"></v-btn>
-      <v-btn icon="mdi-account-cash-outline"></v-btn>
+      <v-btn @click="$router.push('/')" icon="mdi-information-box-outline"></v-btn>
+      <v-btn @click="$router.push('/calculation')" icon="mdi-cart-check"></v-btn>
+      <v-btn @click="$router.push('/result')" icon="mdi-account-cash-outline"></v-btn>
     </template>
   </v-app-bar>
 </template>

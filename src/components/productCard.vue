@@ -5,9 +5,9 @@
     elevation="0"
   >
     <v-card-title
-      ><h1 class="justify-center align-center d-flex px-2">
+      ><h3 class="justify-center align-center d-flex px-2">
         Список продуктов
-      </h1></v-card-title
+      </h3></v-card-title
     >
     <v-list
       elevation="16"
@@ -24,6 +24,7 @@
       <v-text-field
         v-model="name"
         label="Название продукта"
+        prepend-icon="mdi-food-outline"
         type="text"
         class="w-100"
         hide-details="auto"
@@ -32,6 +33,7 @@
       <v-text-field
         v-model="price"
         label="Стоимость"
+        prepend-icon="mdi-currency-rub"
         class="ml-2 w-75"
         type="number"
         hide-details="auto"
@@ -39,11 +41,22 @@
       />
     </div>
     <div class="d-flex px-4 align-center">
-      <v-select
+      <v-combobox
+      prepend-icon="mdi-account-group-outline"
         clearable
-        label="Выберете пользователя"
+        chips
+        multiple
+        label="Выбирите друга"
+        :items="[
+          'California',
+          'Colorado',
+          'Florida',
+          'Georgia',
+          'Texas',
+          'Wyoming',
+        ]"
         variant="solo-filled"
-      ></v-select>
+      ></v-combobox>
     </div>
     <v-card-actions class="justify-center align-center d-flex">
       <v-btn class="border-md rounded-xl">Добавить</v-btn>

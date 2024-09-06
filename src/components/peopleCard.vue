@@ -5,9 +5,9 @@
     elevation="0"
   >
     <v-card-title>
-      <h1 class="justify-center align-center d-flex px-2">
-        Список пользователей
-      </h1>
+      <h3 class="justify-center align-center d-flex px-2">
+        Список друзей
+      </h3>
     </v-card-title>
     <v-list
       elevation="16"
