@@ -1,46 +1,36 @@
-import {defineStore} from 'pinia'
+import {defineStore} from 'pinia';
 
 export const usePeopleStore = defineStore('peopleStore', {
     state: () => ({
-        // return {
-        //     peoples: [],
-        //     foodList: [],
-        //     howOwe: []
-        // }
-        peoples: [
-            {
-                id: 1,
-                name: "Иван",
-            },
-            {
-                id: 2,
-                name: "Данил",
-            },
-            {
-                id: 3,
-                name: "Андрей",
-            },
-        ],
-        foodList: [
-            {
-                id: 1231,
-                foodName: "краб",
-                cost: 111,
-            },
-            {
-                id: 23212,
-                foodName: "мидии",
-                cost: 112,
-            },
-            {
-                id: 331231,
-                foodName: "лангуст",
-                cost: 113,
-            },
-        ]
+        uniqId: 0,
+        peoples: [],
+        foodList: [],
+        howOwe: []
     }),
-    getters: {
-        countedCheck(){
+    getters: {},
+    actions: {
+        // totalCountFood() {
+        //     return this.foodList.length;
+        // },
+        deletePeoleItem(id) {
+            this.peoples = this.peoples.filter(el => el.id !== id);
         },
-    },
-},)
+        deleteFoodItem(id) {
+            this.foodList = this.foodList.filter(el => el.id !== id);
+        },
+        addPeoleItem(name) {
+            this.peoples.push({
+                id: this.uniqId += 1,
+                name: name
+            });
+        },
+        addFoodItem(foodName, cost, peopleList) {
+            this.foodList.push({
+                id: this.uniqId += 1,
+                foodName: foodName,
+                cost: cost,
+                userId: peopleList
+            });
+        }
+    }
+});

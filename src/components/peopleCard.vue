@@ -25,7 +25,7 @@
         <p class="ma-2">{{ index + 1 }}. {{ peoples.name }}</p>
         <!--кнопка удаления-->
         <div>
-          <v-btn density="compact" icon="mdi-minus" class="ma-3"></v-btn>
+          <v-btn density="compact" icon="mdi-minus" class="ma-3" @click="peopleStore.deletePeoleItem(peoples.id)"></v-btn>
         </div>
       </v-list>
     </v-container>
@@ -45,7 +45,9 @@
     <!--    ввод данных-->
     <v-responsive class="px-4 pt-4 align-center"
     >
+<!--      посмотреть апи чтобы убрать иф!!!!!!!!!!!!!!!!!!!!!!-->
       <v-text-field
+          v-model="name"
           clearable
           label="Введите имя"
           variant="solo-filled"
@@ -54,13 +56,23 @@
     </v-responsive>
 
     <v-card-actions class="justify-center align-center d-flex px-2">
-      <v-btn @click="" class="border-md rounded-xl">Добавить</v-btn>
+      <v-btn @click="addPeopleCard" class="border-md rounded-xl">Добавить</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup>
 import {usePeopleStore} from "@/stores/peopleStore";
+import {ref} from "vue"
 
+let name = ref('')
 const peopleStore = usePeopleStore()
+const addPeopleCard = () =>{
+  if (name.value.length >= 1) {
+    peopleStore.addPeoleItem(name.value)
+  } else {
+    alert('Поле заполнения пустое')
+  }
+  name.value = ""
+}
 </script>

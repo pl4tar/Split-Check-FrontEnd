@@ -27,7 +27,7 @@
         <div>
           <p class="d-flex ma-2 align-center">{{ foodList.cost }}
             <v-icon size="x-small" icon="mdi-currency-rub"/>
-            <v-btn density="compact" icon="mdi-minus" class="d-flex ma-3"></v-btn>
+            <v-btn density="compact" icon="mdi-minus" class="d-flex ma-3" @click="foodStore.deleteFoodItem(foodList.id)"></v-btn>
           </p>
         </div>
       </v-list>
