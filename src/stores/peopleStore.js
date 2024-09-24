@@ -1,4 +1,3 @@
-import {ref, computed} from 'vue'
 import {defineStore} from 'pinia'
 
 export const usePeopleStore = defineStore('peopleStore', {
@@ -42,7 +41,6 @@ export const usePeopleStore = defineStore('peopleStore', {
     }),
     getters: {
         countedCheck(){
-
         },
     },
 },)
