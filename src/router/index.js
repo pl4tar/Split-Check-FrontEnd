@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from 'vue-router'
+import {createMemoryHistory, createRouter} from 'vue-router'
 import infoPage from '@/pages/infoPage.vue'
 import countPage from '@/pages/countPage.vue'
 import countedPage from '@/pages/countedPage.vue'

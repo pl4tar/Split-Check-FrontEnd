@@ -6,6 +6,7 @@ import {router} from './router/index.js'
 import {vuetify} from "./vuetify/vuetify.js";
 import "vuetify/dist/vuetify.min.css";
 
+
 const app = createApp(App);
 
 app
