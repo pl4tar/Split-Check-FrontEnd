@@ -96,8 +96,12 @@
       ></v-combobox>
     </div>
     <v-card-actions class="justify-center align-center d-flex">
-      <v-btn @click="addFoodCard" class="border-md rounded-xl">Добавить</v-btn>
-      <!--      <v-btn icon="mdi-arrow-right-circle-outline"></v-btn>-->
+      <v-btn
+          @click="addFoodCard"
+          class="border-md rounded-xl"
+      >
+        Добавить
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -112,7 +116,11 @@ let peoleList = ref([])
 const foodStore = usePeopleStore()
 const addFoodCard = () => {
   if (foodName.value.length >= 1) {
-    foodStore.addFoodItem(foodName.value, foodCost.value, peoleList.value)
+    foodStore.addFoodItem(
+        foodName.value,
+        foodCost.value,
+        peoleList.value
+    )
   } else {
     alert('Поле заполнения пустое')
   }
@@ -121,6 +129,3 @@ const addFoodCard = () => {
   peoleList.value = []
 }
 </script>
-
-<style scoped>
-</style>

@@ -6,26 +6,38 @@
   >
     <!--    заголовок-->
     <v-card-title>
-      <h3 class="justify-center align-center d-flex px-2">
+      <h3
+          class="justify-center align-center d-flex px-2"
+      >
         Список друзей
       </h3>
     </v-card-title>
-
     <!--    списко пользователей -->
     <v-container
         v-if="peopleStore.peoples.length > 0"
         class="overflow-y-auto"
-        max-height="500">
+        max-height="500"
+    >
       <v-list
           elevation="10"
           v-for="(peoples, index) in peopleStore.peoples"
           :key="peoples.id"
           class="d-flex flex-row justify-space-between align-center rounded-xl ma-3"
       >
-        <p class="ma-2">{{ index + 1 }}. {{ peoples.name }}</p>
+        <p
+            class="ma-2"
+        >
+          {{ index + 1 }}. {{ peoples.name }}
+        </p>
         <!--кнопка удаления-->
         <div>
-          <v-btn density="compact" icon="mdi-minus" class="ma-3" @click="peopleStore.deletePeoleItem(peoples.id)"></v-btn>
+          <v-btn
+              density="compact"
+              icon="mdi-minus"
+              class="ma-3"
+              @click="peopleStore.deletePeoleItem(peoples.id)"
+          >
+          </v-btn>
         </div>
       </v-list>
     </v-container>
@@ -43,9 +55,9 @@
       </h3>
     </v-container>
     <!--    ввод данных-->
-    <v-responsive class="px-4 pt-4 align-center"
+    <v-responsive
+        class="px-4 pt-4 align-center"
     >
-<!--      посмотреть апи чтобы убрать иф!!!!!!!!!!!!!!!!!!!!!!-->
       <v-text-field
           @keydown.enter.prevent="addPeopleCard"
           v-model="name"
@@ -56,8 +68,15 @@
       >
     </v-responsive>
 
-    <v-card-actions class="justify-center align-center d-flex px-2">
-      <v-btn @click="addPeopleCard" class="border-md rounded-xl">Добавить</v-btn>
+    <v-card-actions
+        class="justify-center align-center d-flex px-2"
+    >
+      <v-btn
+          @click="addPeopleCard"
+          class="border-md rounded-xl"
+      >
+        Добавить
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -70,7 +89,9 @@ let name = ref('')
 const peopleStore = usePeopleStore()
 const addPeopleCard = () =>{
   if (name.value.length >= 1) {
-    peopleStore.addPeoleItem(name.value)
+    peopleStore.addPeoleItem(
+        name.value
+    )
   } else {
     alert('Поле заполнения пустое')
   }
