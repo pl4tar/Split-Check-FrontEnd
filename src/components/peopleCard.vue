@@ -47,6 +47,7 @@
     >
 <!--      посмотреть апи чтобы убрать иф!!!!!!!!!!!!!!!!!!!!!!-->
       <v-text-field
+          @keydown.enter.prevent="addPeopleCard"
           v-model="name"
           clearable
           label="Введите имя"
@@ -76,3 +77,7 @@ const addPeopleCard = () =>{
   name.value = ""
 }
 </script>
+
+<style>
+
+</style>
