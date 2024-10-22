@@ -39,7 +39,7 @@
         </div>
       </v-card-text>
       <v-card-actions class="justify-center align-center">
-        <v-btn @click="$router.push('/calculation')">
+        <v-btn @click="$router.push({name:'calculation'})">
           Начать
         </v-btn>
       </v-card-actions>

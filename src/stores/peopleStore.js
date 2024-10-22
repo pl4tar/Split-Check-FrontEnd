@@ -5,8 +5,12 @@ export const usePeopleStore = defineStore('peopleStore', {
         uniqId: 0,
         peoples: [],
         foodList: [],
+        howOweEach: [],
         howOwe: []
     }),
+    getters: {
+
+    },
     actions: {
         // Удаление человека из списка по id
         deletePeoleItem(id) {
@@ -25,37 +29,56 @@ export const usePeopleStore = defineStore('peopleStore', {
                 name: name
             });
         },
-
         // Добавление еды и списка людей, которые участвовали
-        addFoodItem(foodName, cost, peopleIds) {
+        addFoodItem(foodName, cost, peoplesId, payerId) {
             this.foodList.push({
                 id: ++this.uniqId,
                 foodName: foodName,
                 cost: cost,
-                peopleList: peopleIds
+                peopleList: peoplesId,
+                whoPaid: payerId
             });
         },
-        // Расчет долга
         calcForEach() {
             this.howOwe = [];
-
             this.foodList.forEach(food => {
-                const amountPerPerson = food.cost / food.peopleList.length;
-
+                let amountPerPerson = food.cost / food.peopleList.length;
+                const payer = food.whoPaid;
                 food.peopleList.forEach(person => {
-                    const existingDebt = this.howOwe.find(debt => debt.id === person.id);
-
-                    if (existingDebt) {
-                        existingDebt.moneyOwn += amountPerPerson;
-                    } else {
-                        this.howOwe.push({
-                            id: person.id,
-                            name: person.name,
-                            moneyOwn: amountPerPerson
+                    if (person.id !== payer.id) {
+                        const existingDebt = this.howOwe.find(debt => debt.from === person.id && debt.to === payer.id);
+                        const coutFlag = true;
+                        if (existingDebt) {
+                            existingDebt.amount += amountPerPerson;
+                        } else {
+                            this.howOwe.push({
+                                from: person.id,
+                                to: payer.id,
+                                fromName: person.name,
+                                toName: payer.name,
+                                amount: amountPerPerson,
+                                counted: coutFlag
+                            });
+                        }
+                        this.howOwe.forEach(debt => {
+                            if (debt => debt.from === person.id && debt.to === payer.id && debt.counted === true) {
+                                const minDebt = Math.min(debt.amount, amountPerPerson);
+                                if (debt.amount > amountPerPerson) {
+                                    debt.amount -= minDebt;
+                                    amountPerPerson = 0;
+                                    debt.counted = false;
+                                } else {
+                                    debt.amount = 0;
+                                    amountPerPerson -= minDebt;
+                                    debt.counted = false;
+                                }
+                                // console.log(minDebt, debt.amount, debt.toName, debt.fromName);
+                            }
                         });
                     }
                 });
             });
+            this.howOwe = this.howOwe.filter(debt => debt.amount > 0);
         }
     }
 });

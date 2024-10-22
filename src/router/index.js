@@ -6,14 +6,17 @@ import countedPage from '@/pages/countedPage.vue'
 const routes = [
     {
         path: '/',
+        name: 'info',
         component: infoPage,
     },
     {
         path: '/calculation',
+        name: 'calculation',
         component: countPage,
     },
     {
         path: '/result',
+        name: 'result',
         component: countedPage,
     },
 ]

@@ -19,8 +19,8 @@
         </v-btn>
       </v-card-actions>
       <v-container
-      v-if="countedStore.howOwe.length > 0"
-      class="overflow-y-auto m-0 p-0"
+          v-if="countedStore.howOwe.length > 0"
+          class="overflow-y-auto m-0 p-0"
       >
         <v-card-title>
           Итоговый счет за всех
@@ -28,13 +28,13 @@
         <v-list
             elevation="10"
             v-for="(howOwe, index) in countedStore.howOwe"
-            :key="howOwe.id"
+            :key="index"
             class="d-flex flex-row justify-space-between align-center rounded-xl ma-3"
         >
           <p
               class="ma-2"
           >
-            {{ index + 1 }}. {{ howOwe.name }}: {{ howOwe.moneyOwn.toFixed(2) }} ₽
+            {{ index + 1 }}. {{ howOwe.fromName }} должен(а) {{ howOwe.toName }}: {{ howOwe.amount.toFixed(2) }} ₽
           </p>
         </v-list>
       </v-container>

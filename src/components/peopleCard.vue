@@ -43,23 +43,31 @@
     </v-container>
     <v-container
         v-else
-        class="overflow-y-auto text-center border-sm">
-      <h3
-          class="font-weight-bold"
+        class="overflow-auto d-flex justify-center align-center text-center"
+    >
+      <v-card
+
+          class="overflow-auto border-sm rounded-xl ma-3 d-flex justify-center align-center text-center"
+          min-height="50"
+          width="100%"
+          elevation="10"
       >
-        Добавьте друзей
-        <v-icon
-            size="small"
-            icon="mdi-account-plus-outline"
-        />
-      </h3>
+        <h3
+            class="font-weight-bold"
+        >
+          Добавьте друзей
+          <v-icon
+              size="small"
+              icon="mdi-account-plus-outline"
+          />
+        </h3>
+      </v-card>
     </v-container>
     <!--    ввод данных-->
     <v-responsive
         class="px-4 pt-4 align-center"
     >
       <v-text-field
-          @keydown.enter.prevent="addPeopleCard"
           v-model="name"
           clearable
           label="Введите имя"
@@ -67,12 +75,12 @@
       ></v-text-field
       >
     </v-responsive>
-
     <v-card-actions
         class="justify-center align-center d-flex px-2"
     >
       <v-btn
           @click="addPeopleCard"
+          :disabled="!name"
           class="border-md rounded-xl"
       >
         Добавить
@@ -87,18 +95,10 @@ import {ref} from "vue"
 
 let name = ref('')
 const peopleStore = usePeopleStore()
-const addPeopleCard = () =>{
-  if (name.value.length >= 1) {
-    peopleStore.addPeoleItem(
-        name.value
-    )
-  } else {
-    alert('Поле заполнения пустое')
-  }
-  name.value = ""
+const addPeopleCard = () => {
+  peopleStore.addPeoleItem(
+      name.value
+  )
+  name.value = ''
 }
 </script>
-
-<style>
-
-</style>

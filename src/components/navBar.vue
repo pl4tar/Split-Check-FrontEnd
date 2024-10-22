@@ -15,15 +15,15 @@
       >
       </v-switch>
       <v-btn
-          @click="$router.push('/')"
+          @click="$router.push({name:'info'})"
           icon="mdi-information-box-outline"
       />
       <v-btn
-          @click="$router.push('/calculation')"
+          @click="$router.push({name:'calculation'})"
           icon="mdi-cart-check"
       />
       <v-btn
-          @click="$router.push('/result')"
+          @click="$router.push({name:'result'})"
           icon="mdi-account-cash-outline"
       />
   </v-app-bar>
