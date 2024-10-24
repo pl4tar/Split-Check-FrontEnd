@@ -5,10 +5,8 @@ export const usePeopleStore = defineStore('peopleStore', {
         uniqId: 0,
         peoples: [],
         foodList: [],
-        howOweEach: [],
         howOwe: []
     }),
-    getters: {},
     actions: {
         // Удаление человека из списка по id
         deletePeoleItem(id) {
@@ -37,6 +35,7 @@ export const usePeopleStore = defineStore('peopleStore', {
                 whoPaid: payerId
             });
         },
+        // Подсчет долга кадого без взаимного вычета
         existingDebtCount() {
             this.foodList.forEach(food => {
                 let amountPerPerson = food.cost / food.peopleList.length;
@@ -44,7 +43,6 @@ export const usePeopleStore = defineStore('peopleStore', {
                 food.peopleList.forEach(person => {
                     if (person.id !== payer.id) {
                         const existingDebt = this.howOwe.find(debt => debt.from === person.id && debt.to === payer.id);
-                        const coutFlag = true;
                         if (existingDebt) {
                             existingDebt.amount += amountPerPerson;
                         } else {
@@ -54,7 +52,6 @@ export const usePeopleStore = defineStore('peopleStore', {
                                 fromName: person.name,
                                 toName: payer.name,
                                 amount: amountPerPerson,
-                                counted: coutFlag
                             });
                         }
 
@@ -65,30 +62,7 @@ export const usePeopleStore = defineStore('peopleStore', {
         calcForEach() {
             this.howOwe = [];
             this.existingDebtCount()
-            // this.foodList.forEach(food => {
-            //     const payer = food.whoPaid;
-            //     let amountPerPerson = food.cost / food.peopleList.length;
-            //     food.peopleList.forEach(person => {
-            //         if (person.id !== payer.id) {
-            //             this.howOwe.forEach(debt => {
-            //                 if (debt.to === person.id && debt.from === payer.id) {
-            //                     const minDebt = Math.min(debt.amount, amountPerPerson);
-            //                     if (debt.amount > amountPerPerson) {
-            //                         debt.amount -= minDebt;
-            //                         amountPerPerson = 0;
-            //                         debt.counted = false;
-            //                     } else {
-            //                         debt.amount = 0;
-            //                         amountPerPerson -= minDebt;
-            //                         debt.counted = false;
-            //                     }
-            //                     console.log(minDebt, debt.amount, debt.toName, debt.fromName);
-            //                 }
-            //             });
-            //         }
-            //     });
-            // });
-
+            // Подсчет долга с взаимным вычетом долгов
             this.howOwe.forEach(payer => {
                 this.howOwe.forEach(person => {
                     if (person.to === payer.from && person.from === payer.to) {
@@ -103,10 +77,7 @@ export const usePeopleStore = defineStore('peopleStore', {
                     }
                 })
             })
-
             this.howOwe = this.howOwe.filter(debt => debt.amount > 0);
         }
-        // попытаться создать новое поле и перезаписывать в него новые значения проходясь по howOwn !!!
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 });

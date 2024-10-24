@@ -46,7 +46,6 @@
         class="overflow-auto d-flex justify-center align-center text-center"
     >
       <v-card
-
           class="overflow-auto border-sm rounded-xl ma-3 d-flex justify-center align-center text-center"
           min-height="50"
           width="100%"

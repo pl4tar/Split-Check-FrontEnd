@@ -27,7 +27,6 @@
         <p class="d-flex ma-2 align-center">
           {{ index + 1 }}. {{ foodList.foodName }}
         </p>
-
         <!--        <v-chip-group-->
         <!--            v-for="person in foodList.peopleList"-->
         <!--            :key="person"-->
