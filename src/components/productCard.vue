@@ -191,7 +191,7 @@ const addFoodCard = () => {
     alert('Поле заполнения пустое')
   }
   foodName.value = ''
-  foodCost.value = 0
+  foodCost.value =
   peoleList.value = []
 }
 </script>

@@ -25,6 +25,7 @@ export const usePeopleStore = defineStore('peopleStore', {
                 name: name
             });
         },
+
         // Добавление еды и списка людей, которые участвовали
         addFoodItem(foodName, cost, peoplesId, payerId) {
             this.foodList.push({
@@ -35,6 +36,7 @@ export const usePeopleStore = defineStore('peopleStore', {
                 whoPaid: payerId
             });
         },
+
         // Подсчет долга кадого без взаимного вычета
         existingDebtCount() {
             this.foodList.forEach(food => {
@@ -59,6 +61,7 @@ export const usePeopleStore = defineStore('peopleStore', {
                 });
             });
         },
+
         calcForEach() {
             this.howOwe = [];
             this.existingDebtCount()
