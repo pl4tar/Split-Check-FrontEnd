@@ -8,9 +8,7 @@ export const usePeopleStore = defineStore('peopleStore', {
         howOweEach: [],
         howOwe: []
     }),
-    getters: {
-
-    },
+    getters: {},
     actions: {
         // Удаление человека из списка по id
         deletePeoleItem(id) {
@@ -39,8 +37,7 @@ export const usePeopleStore = defineStore('peopleStore', {
                 whoPaid: payerId
             });
         },
-        calcForEach() {
-            this.howOwe = [];
+        existingDebtCount() {
             this.foodList.forEach(food => {
                 let amountPerPerson = food.cost / food.peopleList.length;
                 const payer = food.whoPaid;
@@ -60,25 +57,56 @@ export const usePeopleStore = defineStore('peopleStore', {
                                 counted: coutFlag
                             });
                         }
-                        this.howOwe.forEach(debt => {
-                            if (debt => debt.from === person.id && debt.to === payer.id && debt.counted === true) {
-                                const minDebt = Math.min(debt.amount, amountPerPerson);
-                                if (debt.amount > amountPerPerson) {
-                                    debt.amount -= minDebt;
-                                    amountPerPerson = 0;
-                                    debt.counted = false;
-                                } else {
-                                    debt.amount = 0;
-                                    amountPerPerson -= minDebt;
-                                    debt.counted = false;
-                                }
-                                // console.log(minDebt, debt.amount, debt.toName, debt.fromName);
-                            }
-                        });
+
                     }
                 });
             });
+        },
+        calcForEach() {
+            this.howOwe = [];
+            this.existingDebtCount()
+            // this.foodList.forEach(food => {
+            //     const payer = food.whoPaid;
+            //     let amountPerPerson = food.cost / food.peopleList.length;
+            //     food.peopleList.forEach(person => {
+            //         if (person.id !== payer.id) {
+            //             this.howOwe.forEach(debt => {
+            //                 if (debt.to === person.id && debt.from === payer.id) {
+            //                     const minDebt = Math.min(debt.amount, amountPerPerson);
+            //                     if (debt.amount > amountPerPerson) {
+            //                         debt.amount -= minDebt;
+            //                         amountPerPerson = 0;
+            //                         debt.counted = false;
+            //                     } else {
+            //                         debt.amount = 0;
+            //                         amountPerPerson -= minDebt;
+            //                         debt.counted = false;
+            //                     }
+            //                     console.log(minDebt, debt.amount, debt.toName, debt.fromName);
+            //                 }
+            //             });
+            //         }
+            //     });
+            // });
+
+            this.howOwe.forEach(payer => {
+                this.howOwe.forEach(person => {
+                    if (person.to === payer.from && person.from === payer.to) {
+                        const minDebt = Math.min(person.amount, payer.amount);
+                        if (person.amount > payer.amount) {
+                            person.amount -= minDebt;
+                            payer.amount = 0;
+                        } else {
+                            person.amount = 0;
+                            payer.amount -= minDebt;
+                        }
+                    }
+                })
+            })
+
             this.howOwe = this.howOwe.filter(debt => debt.amount > 0);
         }
+        // попытаться создать новое поле и перезаписывать в него новые значения проходясь по howOwn !!!
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 });
