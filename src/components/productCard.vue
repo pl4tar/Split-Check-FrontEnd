@@ -139,7 +139,7 @@
 
 <script setup>
 import {usePeopleStore} from "@/stores/peopleStore.js";
-import {defineComponent, ref} from "vue"
+import {ref} from "vue"
 
 let foodName = ref('')
 let foodCost = ref(0)
