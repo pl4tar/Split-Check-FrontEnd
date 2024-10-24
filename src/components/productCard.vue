@@ -22,18 +22,49 @@
           elevation="10"
           v-for="(foodList, index) in foodStore.foodList"
           :key="foodList.id"
-          class="d-flex flex-row justify-space-between align-center rounded-xl ma-3 "
+          max-height="25%"
+          class="d-flex align-center rounded-xl ma-3 justify-space-between align-center text-center"
       >
-        <p class="d-flex ma-2 align-center">
-          {{ index + 1 }}. {{ foodList.foodName }}
-        </p>
-        <!--        <v-chip-group-->
-        <!--            v-for="person in foodList.peopleList"-->
-        <!--            :key="person"-->
-        <!--        >-->
-        <!--          <v-chip>{{foodStore.getPersonName(person)}}</v-chip>-->
-        <!--        </v-chip-group>-->
-        <div>
+        <div
+            class="d-flex align-center text-align-center w-25"
+        >
+          <p class="ma-2 px-2">
+            {{ index + 1 }}.
+          </p>
+          <h4
+              class="m-2 p-2"
+          >
+            {{ foodList.foodName }}
+          </h4>
+        </div>
+        <v-container
+            class="d-flex align-center w-50 justify-center"
+            max-width="50%"
+        >
+          <v-slide-group
+              show-arrows
+          >
+            <v-slide-group-item
+                v-for="nameShow in foodList.peopleList"
+                :key="nameShow.id"
+            >
+              <v-chip
+                  v-if="nameShow.id === foodList.whoPaid.id"
+                  prepend-icon="mdi-account-credit-card-outline"
+                  >
+                {{nameShow.name}}
+              </v-chip>
+              <v-chip
+                v-else
+                >
+                {{nameShow.name}}
+              </v-chip>
+            </v-slide-group-item>
+          </v-slide-group>
+        </v-container>
+        <div
+            class="d-flex align-center justify-end w-25"
+        >
           <p
               class="d-flex ma-2 align-center"
           >
@@ -77,8 +108,9 @@
       </v-card>
     </v-container>
     <v-form>
-      <div class="pa-2 ma-2 d-flex align-center justify-space-between">
+      <v-container class="pa-2 ma-2 d-flex align-center justify-space-between">
         <v-text-field
+            clearable
             v-model="foodName"
             label="Название продукта"
             prepend-icon="mdi-food-outline"
@@ -93,11 +125,12 @@
             prepend-icon="mdi-currency-rub"
             class="ml-4 w-75"
             type="number"
+            clearable
             hide-details="auto"
             variant="solo-filled"
         />
-      </div>
-      <div class="pa-2 ma-2 d-flex align-center justify-space-between">
+      </v-container>
+      <v-container class="pa-2 ma-2 d-flex align-center justify-space-between">
         <v-combobox
             v-model="peoleList"
             :items="foodStore.peoples"
@@ -123,8 +156,8 @@
             variant="solo-filled"
             class="ml-4 w-75"
         />
-      </div>
-      <div class="justify-center align-center d-flex">
+      </v-container>
+      <v-container class="justify-center align-center d-flex">
         <v-btn
             @click="addFoodCard"
             :disabled="!(foodName && foodCost && whoPaid && peoleList)"
@@ -132,7 +165,7 @@
         >
           Добавить
         </v-btn>
-      </div>
+      </v-container>
     </v-form>
   </v-card>
 </template>
@@ -142,7 +175,7 @@ import {usePeopleStore} from "@/stores/peopleStore.js";
 import {ref} from "vue"
 
 let foodName = ref('')
-let foodCost = ref(0)
+let foodCost = ref()
 let peoleList = ref([])
 let whoPaid = ref([])
 const foodStore = usePeopleStore()
