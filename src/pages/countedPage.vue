@@ -2,12 +2,6 @@
 <counted-card/>
 </template>
 
-<script>
-
-import {defineComponent} from "vue";
+<script setup>
 import CountedCard from "@/components/countedCard.vue";
-
-export default defineComponent({
-  components: {CountedCard}
-})
 </script>

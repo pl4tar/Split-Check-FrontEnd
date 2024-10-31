@@ -8,12 +8,12 @@
         Добро пожаловать!
       </h1>
       <div class="d-flex flex-column text-left align-center justify-center">
-          <p>
-            Это приложение созданно для больших конмапий, котрые постоянно находятся
-          </p>
-          <p>
-            в затруднительном положении, когда встает вопрос денях)
-          </p>
+        <p>
+          Это приложение созданно для больших конмапий, котрые постоянно находятся
+        </p>
+        <p>
+          в затруднительном положении, когда встает вопрос денях)
+        </p>
       </div>
       <v-card-text class="d-flex flex-column text-left align-center justify-center text-h6 font-weight-medium">
         <div class="d-flex align-center">

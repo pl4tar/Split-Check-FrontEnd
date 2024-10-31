@@ -18,6 +18,9 @@
           Рассчитать
         </v-btn>
       </v-card-actions>
+      <v-container v-if="calculated && countedStore.howOwe.length === 0" class="d-flex justify-center align-center text-center">
+        <h2>Никто никому ничего не должен</h2>
+      </v-container>
       <v-container
           v-if="countedStore.howOwe.length > 0"
           class="overflow-y-auto m-0 p-0"
@@ -28,12 +31,10 @@
         <v-list
             elevation="10"
             v-for="(howOwe, index) in countedStore.howOwe"
-            :key="index"
+            :key="howOwe.id"
             class="d-flex flex-row justify-space-between align-center rounded-xl ma-3"
         >
-          <p
-              class="ma-2"
-          >
+          <p class="ma-2">
             {{ index + 1 }}. {{ howOwe.fromName }} должен(а) {{ howOwe.toName }}: {{ howOwe.amount.toFixed(2) }} ₽
           </p>
         </v-list>
@@ -43,11 +44,14 @@
 </template>
 
 <script setup>
-import { usePeopleStore } from "@/stores/peopleStore.js";
+import {ref} from "vue";
+import {usePeopleStore} from "@/stores/peopleStore.js";
 
 const countedStore = usePeopleStore();
+const calculated = ref(false); // Индикатор расчета
 
 const calcEach = () => {
   countedStore.calcForEach();
+  calculated.value = true; // Устанавливаем в true после расчета
 };
 </script>

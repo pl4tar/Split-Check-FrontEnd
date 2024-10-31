@@ -107,7 +107,9 @@
         </h3>
       </v-card>
     </v-container>
-    <v-form>
+    <v-form
+        @submit.prevent="addFoodCard"
+    >
       <v-container class="pa-2 ma-2 d-flex align-center justify-space-between">
         <v-text-field
             clearable
@@ -159,7 +161,7 @@
       </v-container>
       <v-container class="justify-center align-center d-flex">
         <v-btn
-            @click="addFoodCard"
+            type="submit"
             :disabled="!(foodName && foodCost && whoPaid && peoleList)"
             class="border-md rounded-xl d-flex"
         >
